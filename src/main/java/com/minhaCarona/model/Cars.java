@@ -1,6 +1,7 @@
 package com.minhaCarona.model;
 
 
+import com.minhaCarona.dto.CarsData;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

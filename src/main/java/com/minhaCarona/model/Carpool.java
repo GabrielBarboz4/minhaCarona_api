@@ -1,5 +1,6 @@
 package com.minhaCarona.model;
 
+import com.minhaCarona.dto.CarpoolData;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @Entity
 @Table (name = "carpool")
 public class Carpool {
+
     @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long carpoolId;
     private String tenantName;
