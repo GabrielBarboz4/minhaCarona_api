@@ -3,6 +3,7 @@ package com.minhaCarona.controller;
 import com.minhaCarona.model.Cars;
 import com.minhaCarona.dto.CarsData;
 import com.minhaCarona.service.CarService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class CarsController {
     }
 
     @PostMapping( "/registerVehicle" )
-    public ResponseEntity < Cars > registerVehicle( @RequestBody CarsData vehicleRecord ){
+    public ResponseEntity < Cars > registerVehicle( @Valid @RequestBody CarsData vehicleRecord ){
         Cars cars =  service.registerVehicle( vehicleRecord );
 
         return ResponseEntity.status(HttpStatus.CREATED).body(cars);
@@ -40,7 +41,7 @@ public class CarsController {
     }
 
     @PutMapping( "/{carId}" )
-    public ResponseEntity < Cars > editVehicle ( @PathVariable Long carId, @RequestBody CarsData vehicleRecord ) {
+    public ResponseEntity < Cars > editVehicle ( @PathVariable Long carId, @Valid @RequestBody CarsData vehicleRecord ) {
           Cars updateCar = service.editVehicle( carId, vehicleRecord );
           return ResponseEntity.ok(updateCar);
     }

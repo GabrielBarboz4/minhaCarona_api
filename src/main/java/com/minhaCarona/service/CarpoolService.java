@@ -27,9 +27,9 @@ public class CarpoolService {
     }
 
     public Carpool registerCarpool(CarpoolData carpoolData) {
-
         Cars car = carsRepository.findById(carpoolData.carId())
                 .orElseThrow(() -> new VehicleNotFoundException ("Vehicle not found with ID: " + carpoolData.carId()));
+
         return carpoolRepository.save(new Carpool(carpoolData, car));
     }
 
@@ -38,12 +38,10 @@ public class CarpoolService {
     }
 
     public void deleteCarpool(Long carpoolId) {
-        Optional <Carpool> carpoolFinder = carpoolRepository.findById(carpoolId);
 
-        if (carpoolFinder.isEmpty()) {
-            throw new CarpoolNotFoundException("Carpool not found with ID" + carpoolId);
-        }
+        Carpool carpool = carpoolRepository.findById(carpoolId)
+                .orElseThrow(()-> new CarpoolNotFoundException("Carpool not found with ID: " + carpoolId));
 
-        carpoolRepository.deleteById(carpoolId);
+        carpoolRepository.delete(carpool);
     }
 }

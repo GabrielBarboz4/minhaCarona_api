@@ -3,6 +3,7 @@ package com.minhaCarona.controller;
 import com.minhaCarona.model.Carpool;
 import com.minhaCarona.dto.CarpoolData;
 import com.minhaCarona.service.CarpoolService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +23,10 @@ public class CarpoolController {
     }
 
     @PostMapping( "/register" )
-    public ResponseEntity < Carpool > registerCarpool ( @RequestBody CarpoolData carpoolData ) {
+    public ResponseEntity < Carpool > registerCarpool ( @Valid @RequestBody CarpoolData carpoolData ) {
+        Carpool registeredCarpool = service.registerCarpool( carpoolData );
 
-            Carpool registeredCarpool = service.registerCarpool( carpoolData );
-            return ResponseEntity.status(HttpStatus.CREATED).body( registeredCarpool );
+        return ResponseEntity.status(HttpStatus.CREATED).body( registeredCarpool );
     }
 
     @GetMapping

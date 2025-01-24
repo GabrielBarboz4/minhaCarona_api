@@ -28,13 +28,11 @@ public class CarService {
     }
 
     public void deleteById ( Long carId ) {
-        Optional<Cars> carFinder = carsRepository.findById( carId );
 
-        if (carFinder.isEmpty()) {
-            throw new VehicleNotFoundException("Vehicle not found with ID: " + carId);
-        }
+        Cars car = carsRepository.findById( carId )
+                .orElseThrow(()-> new VehicleNotFoundException("Vehicle not found with ID: " + carId));
 
-        carsRepository.deleteById(carId);
+        carsRepository.delete(car);
     }
 
     public Cars editVehicle ( Long carId, CarsData vehicleRecord ) {
@@ -53,6 +51,7 @@ public class CarService {
     public List < Cars > findCarByName ( String carModel ) {
 
         List <Cars> listOfCars = carsRepository.findCarModel(carModel);
+
         if (listOfCars.isEmpty()) {
             throw new VehicleNotFoundException("Vehicle " + carModel + " not found");
         }
